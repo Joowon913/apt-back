@@ -6,7 +6,7 @@ create table place (
 place_id bigint not null auto_increment,
 work_place varchar(30) not null,
 address varchar(30) not null,
-primary key(seq)
+primary key(place_id)
 );
 
 create table emp (
@@ -21,14 +21,14 @@ name varchar(10) not null,
 phone varchar(13) not null,
 address varchar(100) not null,
 address_detail varchar(100),
-birth varchar(8) not null,
+birth date not null,
 primary key(emp_id),
 foreign key(place_id) references place(place_id) on delete cascade
 );
 
 create table integration (
 integration_id bigint not null auto_increment,
-emp_id bigint not null comment,
+emp_id bigint not null,
 field varchar(10) not null,
 title varchar(30) not null,
 content text(1000) not null,
@@ -45,42 +45,42 @@ foreign key(emp_id) references emp(emp_id) on delete cascade
 );
 
 create table lost_item (
-seq bigint not null auto_increment,
+lostitem_id bigint not null auto_increment,
 emp_id bigint not null,
 title varchar(30) not null,
 content text(1000) not null,
 note text(1000),
 status varchar(10) not null,
-emp_name varchar(10) not null,
+name varchar(10) not null,
 insert_date date not null,
 update_date date,
-primary key(seq),
+primary key(lostitem_id),
 foreign key(emp_id) references emp(emp_id) on delete cascade
 );
 
 create table event (
-seq bigint not null auto_increment,
+event_id bigint not null auto_increment,
 emp_id bigint not null,
 date_time datetime not null,
 title varchar(30) not null,
 content text(1000) not null,
 note text(1000),
-emp_name varchar(10) not null,
+name varchar(10) not null,
 insert_date date not null,
 update_date date,
-primary key(seq),
+primary key(event_id),
 foreign key(emp_id) references emp(emp_id) on delete cascade
 );
 
 create table parking (
-seq bigint not null auto_increment,
+parking_id bigint not null auto_increment,
 emp_id bigint not null,
 car_number varchar(10) not null,
 location varchar(10) not null,
 note text(1000),
-emp_name varchar(10) not null,
+name varchar(10) not null,
 insert_date date not null,
 update_date date,
-primary key(seq),
+primary key(parking_id),
 foreign key(emp_id) references emp(emp_id) on delete cascade
 );

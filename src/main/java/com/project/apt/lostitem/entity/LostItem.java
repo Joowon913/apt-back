@@ -1,8 +1,9 @@
-package com.project.apt.emp.entity;
+package com.project.apt.lostitem.entity;
 
 import java.sql.Date;
 
-import com.project.apt.emp.dto.EmpDto;
+import com.project.apt.lostitem.dto.LostItemDto;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,43 +23,39 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class Emp {
+public class LostItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "lostitem_id")
+	private Long lostItemId;
+	
 	@Column(name = "emp_id")
 	private Long empId;
-	
-	@Column(name = "place_id")
-	private Long placeId;
-	private String id;
-	private String password;
-	private String department;
-	private String position;
-	private String auth;
+	private String title;
+	private String content;
+	private String note;
+	private String status;
 	private String name;
-	private String phone;
-	private String address;
-	@Column(name = "address_detail")
-	private String addressDetail;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "birth")
-	private Date birth;
+	@Column(name = "insert_date")
+	private Date insertDate;
 	
-	public EmpDto toDto() {
-		return EmpDto.builder()
+	@Temporal(TemporalType.DATE)
+	@Column(name = "update_date")
+	private Date updateDate;
+	
+	public LostItemDto toDto() {
+		return LostItemDto.builder()
+				.lostItemId(this.lostItemId)
 				.empId(this.empId)
-				.placeId(this.placeId)
-				.id(this.id)
-				.password(this.password)
-				.department(this.department)
-				.position(this.position)
-				.auth(this.auth)
+				.title(this.title)
+				.content(this.content)
+				.note(this.note)
+				.status(this.status)
 				.name(this.name)
-				.phone(this.phone)
-				.address(this.address)
-				.addressDetail(this.addressDetail)
-				.birth(this.birth)
+				.insertDate(this.insertDate)
+				.updateDate(this.updateDate)
 				.build();
 	}
 }
