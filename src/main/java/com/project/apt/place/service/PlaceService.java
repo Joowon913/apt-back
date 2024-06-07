@@ -21,4 +21,11 @@ public class PlaceService {
 		List<PlaceDto> placeDtoList = placeList.stream().map(Place::toDto).collect(Collectors.toList());
 		return placeDtoList;
 	}
+	
+	public PlaceDto createPlace(PlaceDto placeDto) {
+		Place place = placeDto.toEntity();
+		Place savePlace = placeRepository.save(place);
+		
+		return savePlace.toDto();
+	}
 }
