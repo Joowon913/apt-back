@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import com.project.apt.emp.entity.Emp;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 @Setter
@@ -11,8 +12,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(description = "근무자 정보 DTO")
 public class EmpDto {
+
+	@Schema(description = "근무자ID")
 	private Long empId;
+
+	@Schema(description = "근무지ID")
 	private Long placeId;
 	private String id;
 	private String password;
