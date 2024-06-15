@@ -8,4 +8,6 @@ import com.project.apt.place.entity.Place;
 
 public interface PlaceRepository extends JpaRepository<Place, Long>{
 	public List<Place> findAll();
+
+	public int deleteAllByPlaceIdIn(List<Long> idList);
 }

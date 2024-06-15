@@ -22,4 +22,10 @@ public class EventService {
 		List<EventDto> eventDtoList = eventList.stream().map(Event::toDto).collect(Collectors.toList());
 		return eventDtoList;
 	}
+	
+	public EventDto createEmp(EventDto eventDto) {
+		Event event = eventDto.toEntity();
+		Event saveEvent = eventRepository.save(event);
+		return saveEvent.toDto();
+	}
 }

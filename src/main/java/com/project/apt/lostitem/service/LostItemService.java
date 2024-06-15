@@ -21,4 +21,10 @@ public class LostItemService {
 		List<LostItemDto> lostItemDtoList = lostItemList.stream().map(LostItem::toDto).collect(Collectors.toList());
 		return lostItemDtoList;
 	}
+	
+	public LostItemDto createLostItem(LostItemDto lostItemDto) {
+		LostItem lostItem = lostItemDto.toEntity();
+		LostItem saveLostItem = lostItemRepository.save(lostItem);
+		return saveLostItem.toDto();
+	}
 }

@@ -1,6 +1,7 @@
 package com.project.apt.place.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -25,7 +26,28 @@ public class PlaceService {
 	public PlaceDto createPlace(PlaceDto placeDto) {
 		Place place = placeDto.toEntity();
 		Place savePlace = placeRepository.save(place);
-		
 		return savePlace.toDto();
+	}
+	
+	public PlaceDto updatePlace(PlaceDto placeDto) {
+		Place place = placeDto.toEntity();
+		
+		Optional<Place> existPlace = placeRepository.findById(place.getPlaceId());
+		
+		if(existPlace.isPresent()) {
+			Place updatePlace = placeRepository.save(place);
+			return updatePlace.toDto();
+		} else {
+			return null;
+		}
+	}
+	
+	public boolean deletePlaceList(List<Long> idList) {
+		int deletedCount = placeRepository.deleteAllByPlaceIdIn(idList);
+		if(deletedCount > 0 && deletedCount == idList.size()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
